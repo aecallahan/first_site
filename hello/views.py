@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from django.template.loader import get_template
+from django.template import Context
+from django.http import HttpResponse
+
+from hello.utils import random_image
 
 my_strings = ['string1', 'string2', ]
 
@@ -9,4 +14,7 @@ def index(request):
 
 
 def game(request):
-	return render(request, 'game.html')
+	template = get_template('game.html')
+	image = random_image()
+	html = template.render(Context({'image_file': image}))
+	return HttpResponse(html)
