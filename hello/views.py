@@ -3,7 +3,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.http import HttpResponse
 
-from hello.utils import random_image
+from hello.utils import random_pokemon
 
 my_strings = ['string1', 'string2', ]
 
@@ -15,6 +15,6 @@ def index(request):
 
 def game(request):
 	template = get_template('game.html')
-	image = random_image()
+	image = random_pokemon()
 	html = template.render(Context({'image_file': image}))
 	return HttpResponse(html)

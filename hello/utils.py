@@ -1,18 +1,23 @@
 from random import randint
 
-TOTAL_PICTURES = 4
+TOTAL_POKEMON = 9
 FILE_NAMES = [
-	'lang-logo.png',
-	'one.png',
-	'two.jpg',
-	'three.jpg'
+	'001Bulbasaur.png',
+	'002Ivysaur.png',
+	'003Venusaur.png',
+	'004Charmander.png',
+	'005Charmeleon.png',
+	'006Charizard.png',
+	'007Squirtle.png',
+	'008Wartortle.png',
+	'009Blastoise.png',
 ]
 
 
-def random_image():
+def random_pokemon():
 	'''
-	Decide which image to load in-game
+	Decide which pokemon image to load in-game
 	'''
 	# Choose index of picture
-	number = randint(0, TOTAL_PICTURES - 1)
+	number = randint(0, TOTAL_POKEMON - 1)
 	return FILE_NAMES[number]
