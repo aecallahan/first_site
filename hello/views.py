@@ -14,7 +14,7 @@ def index(request):
 
 
 def game(request):
-	template = get_template('game.html')
-	image = random_pokemon()
-	html = template.render(Context({'image_file': image}))
-	return HttpResponse(html)
+    template = get_template('game.html')
+    image = random_pokemon()
+    html = template.render(Context({'image_file': image}))
+    return HttpResponse(html)
