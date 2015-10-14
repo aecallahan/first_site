@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'gettingstarted.wsgi.application'
 # }
 
 DATABASES = {'default': dj_database_url.config()}
-DATABASES['default']['NAME'] = 'pokemon_db'
+# DATABASES['default']['NAME'] = 'pokemon_db'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
