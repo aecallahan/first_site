@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from hello.models import Attempt
+
+
+class AttemptAdmin(admin.ModelAdmin):
+    # Set fields that appear in the Attempts admin interface
+    list_display = ('player_name', 'score')
+    # Set fields that appear when an Attempt is edited in the admin interface
+    fields = list_display
+
+
+admin.site.register(Attempt, AttemptAdmin)

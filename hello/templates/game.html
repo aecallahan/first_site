@@ -4,11 +4,16 @@
 
 <div class="jumbotron text-center">
     <p>Who's that pokemon?</p>
-    <img class="pokemon-picture" src="{% static image_file %}">
+    <img src="{% static image_file %}" class="pokemon-picture">
     <p>
-        <input class="pokemon-name" type="text" maxlength="50">
+        <input type="text" class="pokemon-name" maxlength="50">
     </p>
 </div>
 
-{# <script type="text/javascript" src="/hello/utils.js"></script> #}
+{# Set the pokemon's name in Javascript #}
+<script type="text/javascript">
+    var pokemonName = "{{pokemon_name}}"
+</script>
+
+<script type="text/javascript" src="{% static 'javascript/pokemon.js' %}"></script>
 {% endblock %}
