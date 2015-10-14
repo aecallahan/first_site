@@ -3,11 +3,16 @@
 {% block content %}
 
 <div class="jumbotron text-center">
-    <p>Who's that pokemon?</p>
+    <p>Who's that pokemon, {{ player_name }}</p>
     <img src="{% static image_file %}" class="pokemon-picture">
-    <p>
-        <input type="text" class="pokemon-name" maxlength="50">
-    </p>
+    <form action="/game/" method="post">
+        {% csrf_token %}
+        <p>
+            <input type="text" class="pokemon-name" maxlength="50" name="name">
+            <input type="submit" value="Go!">
+            <input name="attempt_id" value="{{ attempt_id }}">
+        </p>
+    </form>
 </div>
 
 {# Set the pokemon's name in Javascript #}

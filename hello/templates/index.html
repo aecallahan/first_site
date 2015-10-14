@@ -4,14 +4,16 @@
 {% block content %}
 
 <div class="jumbotron text-center">
-  <div class="container">
-    <img src="{% static 'lang-logo.png'%}">
-    <h1>Andrew Callahan</h1>
-    <p>Welcome to my site!</p>
-    <a type="button" class="btn btn-lg btn-default" href="/game/">
-      <span class="glyphicon glyphicon-flash"></span> Start
-    </a>
-  </div>
+    <div class="container">
+        <img src="{% static 'lang-logo.png'%}">
+        <h1>Andrew Callahan</h1>
+        <p>Welcome to my site!</p>
+        <form action="/game/" method="post">
+            {% csrf_token %}
+            <input type="text" class="player-name" maxlength="25" name="player_name">
+                <input type="submit" value="Start">
+        </form>
+    </div>
 </div>
 
 {% endblock %}
