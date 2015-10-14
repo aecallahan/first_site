@@ -11,5 +11,5 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', hello.views.index, name='index'),
     url(r'^game/', hello.views.game, name='game'),
-    url(r'^guess_name/', hello.views.guess, name='guess'),
+    # url(r'^guess_name/', hello.views.guess, name='guess'),
 )

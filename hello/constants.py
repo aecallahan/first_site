@@ -12,15 +12,15 @@ FILE_NAMES = [
 
 
 POKEMON_NAMES = [
-    'Bulbasaur',
-    'Ivysaur',
-    'Venusaur',
-    'Charmander',
-    'Charmeleon',
-    'Charizard',
-    'Squirtle',
-    'Wartortle',
-    'Blastoise',
+    'bulbasaur',
+    'ivysaur',
+    'venusaur',
+    'charmander',
+    'charmeleon',
+    'charizard',
+    'squirtle',
+    'wartortle',
+    'blastoise',
 ]
 
 

@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'gettingstarted.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# Parse database configuration from $DATABASE_URL
 DATABASES = {'default': dj_database_url.config()}
 # DATABASES['default']['NAME'] = 'pokemon_db'
 
@@ -88,12 +89,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
-# Parse database configuration from $DATABASE_URL
-# DATABASES['default'] =  dj_database_url.config()
-
 # Enable Connection Pooling (if desired)
-DATABASES['default']['ENGINE'] = 'django_postgrespool'
+# DATABASES['default']['ENGINE'] = 'django_postgrespool'
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -2,15 +2,22 @@
 {% load staticfiles %}
 {% block content %}
 
-<div class="jumbotron text-center">
+<div>
     <p>Who's that pokemon, {{ player_name }}</p>
-    <img src="{% static image_file %}" class="pokemon-picture">
-    <form action="/game/" method="post">
-        {% csrf_token %}
+    <div id="wrapper">
+        <div id="picture-div">
+            <img src="{% static image_file %}" class="pokemon-picture">
+        </div>
+        <div id="score">
+            <p>Time: <span id="timer"></span></p>
+            <p>Score:</p>
+            <p>{{ player_score }}</p>
+        </div>
+    </div>
+    <form action="/game/" method="post" id="poke-form">
         <p>
-            <input type="text" class="pokemon-name" maxlength="50" name="name">
-            <input type="submit" value="Go!">
-            <input name="attempt_id" value="{{ attempt_id }}">
+            {% csrf_token %}
+            <input type="text" id="pokemon-name" maxlength="50" name="poke_name" autofocus>
         </p>
     </form>
 </div>

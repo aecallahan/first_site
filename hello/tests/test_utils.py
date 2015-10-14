@@ -18,6 +18,6 @@ class UtilsTests(TestCase):
 
     def test_pokemon_name(self):
         poke_id = 6
-        expected = 'Charizard'
+        expected = 'charizard'
         actual = pokemon_name(poke_id)
         self.assertEqual(expected, actual)

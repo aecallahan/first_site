@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from hello.utils import random_id, image_file, pokemon_name
-from hello.models import Attempt
+from hello.models import Attempt, check
 
 my_strings = ['string1', 'string2', ]
 
@@ -13,24 +13,33 @@ my_strings = ['string1', 'string2', ]
 def index(request):
     return render(request, 'index.html')
 
-# Get rid of this exemption
+
 @csrf_exempt
 def game(request):
-    # Set player_name to be 'blank' if nothing is entered
-    player_name = request.POST.get('player_name', 'blank')
-    attempt_id = request.POST.get('attempt_id', None)
-
-    # If the attempt_id is blank, this is a new game
-    if not attempt_id:
-        # Create a new attempt object (score set to 0)
-        attempt = Attempt.objects.create(player_name=player_name)
-    else:
-        attempt = Attempt.objects.get(pk=attempt_id)
-        attempt.score += 1
+    # If attempt_id is set, a game is being continued
+    if "attempt_id" in request.session:
+        attempt = Attempt.objects.get(pk=request.session['attempt_id'])
+        last_guess = request.POST.get('poke_name')
+        attempt.last_guess = last_guess
         attempt.save()
+
+        if check(attempt):
+            attempt.score += 1
+            attempt.save()
+        else:
+            del request.session['attempt_id']
+            return high_score(request)
+
+    # Otherwise, a game is being started
+    else:
+        player_name = request.POST.get('player_name', 'blank')
+        attempt = Attempt.objects.create(player_name=player_name)
+        request.session['attempt_id'] = attempt.id
 
     template = get_template('game.html')
     pokemon_id = random_id()
+    attempt.last_poke_id = pokemon_id
+    attempt.save()
     image = image_file(pokemon_id)
     poke_name = pokemon_name(pokemon_id)
 
@@ -39,13 +48,14 @@ def game(request):
         'pokemon_name': poke_name,
         'player_name': attempt.player_name,
         'player_score': attempt.score,
-        'attempt_id': attempt.id,
     }
 
     html = template.render(Context(data))
     return HttpResponse(html)
 
 
-def guess(request):
-    name = HttpResponse(request.GET['name'])
-    return HttpResponse(request.GET['name'])
+def high_score(request):
+    '''
+    This page of high scores is returned after a player loses
+    '''
+    return HttpResponse("You lost!")
