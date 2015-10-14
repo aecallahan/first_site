@@ -6,7 +6,8 @@ import hello.views
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', hello.views.index, name='index'),
     url(r'^game/', hello.views.game, name='game'),
     url(r'^admin/', include(admin.site.urls)),
