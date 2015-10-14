@@ -11,6 +11,10 @@ my_strings = ['string1', 'string2', ]
 
 
 def index(request):
+    # Delete the session if a user interrupted a game to navigate here
+    if "attempt_id" in request.session:
+        del request.session['attempt_id']
+
     return render(request, 'index.html')
 
 
@@ -27,16 +31,13 @@ def game(request):
             attempt.score += 1
             attempt.save()
         else:
-            del request.session['attempt_id']
-            return high_score(request)
+            return game_over(request, attempt)
 
     # Otherwise, a game is being started
     else:
-        player_name = request.POST.get('player_name', 'blank')
-        attempt = Attempt.objects.create(player_name=player_name)
+        attempt = Attempt.objects.create()
         request.session['attempt_id'] = attempt.id
 
-    template = get_template('game.html')
     pokemon_id = random_id()
     attempt.last_poke_id = pokemon_id
     attempt.save()
@@ -46,16 +47,40 @@ def game(request):
     data = {
         'image_file': "images/%s" % image,
         'pokemon_name': poke_name,
-        'player_name': attempt.player_name,
         'player_score': attempt.score,
     }
 
+    template = get_template('game.html')
     html = template.render(Context(data))
     return HttpResponse(html)
 
 
-def high_score(request):
+def game_over(request, attempt):
     '''
     This page of high scores is returned after a player loses
     '''
-    return HttpResponse("You lost!")
+    data = {
+        'pokemon_name': pokemon_name(attempt.last_poke_id).capitalize(),
+        'player_score': attempt.score,
+    }
+    template = get_template('game_over.html')
+    html = template.render(Context(data))
+    return HttpResponse(html)
+
+
+@csrf_exempt
+def scores(request):
+    '''
+    Display a table of high scores
+    '''
+    if "attempt_id" in request.session:
+        # Record the player's name
+        attempt = Attempt.objects.get(pk=request.session['attempt_id'])
+        attempt.player_name = request.POST.get('player_name', 'unknown')
+        attempt.save()
+
+        # End the player's session
+        del request.session['attempt_id']
+
+    return render(request, 'high_scores.html',
+                  {'attempts': Attempt.objects.all()[:10]})

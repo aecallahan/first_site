@@ -1,13 +1,22 @@
 // Hacky frontend utility functions until I change this to use a restful JS framework
 
-checkAnswer = function() {
-    if (input.value.toLowerCase() == pokemonName) {
-        document.getElementById('poke-form').submit();
-    }
-};
+$(document).ready(function() {
+    // Disable enter key
+    $('html').bind('keypress', function(e) {
+        code = e.keyCode || e.which;
+       if (code == 13) {
+          e.preventDefault();
+          return false;
+       }
+    });
 
-var input = document.getElementById('pokemon-name');
-input.oninput = checkAnswer;
+    // Auto-submit the form when the correct answer has been entered
+    $('#pokemon-name').on('input', function() {
+        if ($(this).val().toLowerCase() == pokemonName) {
+            document.getElementById('poke-form').submit();
+        }
+    });
+});
 
 
 var display = document.getElementById('timer');
@@ -19,7 +28,6 @@ function startTimer(duration, display) {
         display.textContent = duration;
 
         if (--duration < 0) {
-            // display.textContent = "time's up!";
             document.getElementById('poke-form').submit();
         }
     }, 1000);

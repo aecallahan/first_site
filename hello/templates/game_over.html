@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="game-over">
+    <br>
+    <p>The correct answer was {{ pokemon_name }}</p>
+    <br>
+    <p>Final Score: {{ player_score }}</p>
+    <br>
+    <p>Enter your name</p>
+    <form action="/scores/" method="post">
+        {% csrf_token %}
+        <p>
+            <input type="text" class="player-name" maxlength="50" name="player_name" autocomplete="off" autofocus>
+            <input type="submit" value="Submit" class="player-name">
+        </p>
+    </form>
+</div>
+
+{% endblock %}
