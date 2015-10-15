@@ -33,6 +33,12 @@ FILE_NAMES = [
     '032Nidoran.png',
     '033Nidorino.png',
     '034Nidoking.png',
+    '035Clefairy.png',
+    '036Clefable.png',
+    '037Vulpix.png',
+    '038Ninetales.png',
+    '039Jigglypuff.png',
+    '040Wigglytuff.png',
 ]
 
 
@@ -71,6 +77,12 @@ POKEMON_NAMES = [
     'nidoran',
     'nidorino',
     'nidoking',
+    'clefairy',
+    'clefable',
+    'vulpix',
+    'ninetales',
+    'jigglypuff',
+    'wigglytuff',
 ]
 
 

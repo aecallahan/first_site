@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 
 var display = document.getElementById('timer');
-startTimer(5, display);
+startTimer(9, display);
 
 
 function startTimer(duration, display) {
