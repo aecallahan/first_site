@@ -1,14 +1,15 @@
 from random import randint
 
 
-from hello.constants import FILE_NAMES, POKEMON_NAMES, TOTAL_POKEMON
+from hello.constants import FILE_NAMES, POKEMON_NAMES
 
 
-def random_id():
+def random_id(attempt):
     '''
-    Return a random pokemon id
+    Randomly return a pokemon id which hasn't been seen yet
     '''
-    return randint(1, TOTAL_POKEMON)
+    ids_to_choose_from = attempt.not_guessed_id_list
+    return ids_to_choose_from[randint(0, len(ids_to_choose_from) - 1)]
 
 
 def image_file(pokemon_id):

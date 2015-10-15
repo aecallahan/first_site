@@ -4,11 +4,15 @@
 
 <div class="game-over">
     <br>
-    <p>The correct answer was {{ pokemon_name }}</p>
+    {% if complete %}
+        <p>Congratulations! You got them all!</p>
+    {% else %}
+        <p>New high score!</p>
+    {% endif %}
     <br>
     <p>Final Score: {{ player_score }} out of {{ max_score }}</p>
     <br>
-    <p>Enter your name</p>
+    <p>Please enter your name</p>
     <form action="/scores/" method="post">
         {% csrf_token %}
         <p>
