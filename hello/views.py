@@ -40,7 +40,7 @@ def game(request):
                 return new_high_score(request, attempt)
         else:
             # Send the player to the high score page if they have a high score
-            if attempt.score > Attempt.objects.all()[9].score:
+            if attempt.is_high_score:
                 return new_high_score(request, attempt)
             return game_over(request, attempt)
 
@@ -109,5 +109,11 @@ def scores(request):
         # End the player's session
         del request.session['attempt_id']
 
+    # Return the top 10 scores
+    all_attempts = Attempt.objects.all()
+    if len(all_attempts) > 10:
+        attempts = all_attempts[:10]
+    else:
+        attempts = all_attempts
     return render(request, 'high_scores.html',
-                  {'attempts': Attempt.objects.all()[:10]})
+                  {'attempts': attempts})

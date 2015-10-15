@@ -34,6 +34,16 @@ class Attempt(models.Model):
     def complete(self):
         return self.score == TOTAL_POKEMON
 
+    @property
+    def is_high_score(self):
+        '''
+        Returns whether or not the player achieved a high score
+        '''
+        all_attempts = Attempt.objects.all()
+        if len(all_attempts) > 9:
+            return self.score and self.score >= all_attempts[9].score
+        return self.score > 0
+
     def append_poke_id(self):
         '''
         Appends a new pokemon id to the list of guessed pokemon ids
