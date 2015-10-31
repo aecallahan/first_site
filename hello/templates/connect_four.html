@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Connect Three</h1>
+
+    <div class="game">
+        <table class="column" id="col0">
+            <tr>
+                <td>
+                    <div class="circle 3"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 2"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 1"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 0"></div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="column" id="col1">
+            <tr>
+                <td>
+                    <div class="circle 3"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 2"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 1"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 0"></div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="column" id="col2">
+            <tr>
+                <td>
+                    <div class="circle 3"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 2"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 1"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 0"></div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="column" id="col3">
+            <tr>
+                <td>
+                    <div class="circle 3"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 2"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 1"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="circle 0"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h3 class="warning"><span id="loading"></span> Calculating, please wait...</h3>
+</div>
+
+<script src="{% static 'javascript/connectFour.js' %}"></script>
+<script src="http://fgnass.github.io/spin.js/spin.min.js"></script>
+<link rel="stylesheet" href="{%static 'stylesheets/style.css' %}">
+
+{% endblock %}

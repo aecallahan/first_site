@@ -117,3 +117,10 @@ def scores(request):
         attempts = all_attempts
     return render(request, 'high_scores.html',
                   {'attempts': attempts})
+
+
+def connect(request):
+    '''
+    Display connect four game
+    '''
+    return render(request, 'connect_four.html')

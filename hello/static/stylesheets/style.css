@@ -1,0 +1,30 @@
+
+.game {
+    width: 100%;
+    margin: 0 auto;
+}
+.column {
+    display: inline-block;
+}
+.circle {
+    width: 130px;
+    height: 130px;
+    font-size: 80px;
+    line-height: 130px;
+    border: 1px solid;
+    border-radius: 50%;
+    margin-top: 3px;
+}
+.circle.red {
+    background-color: red;
+}
+.circle.black {
+    background-color: black;
+}
+.victory {
+    border: 10px solid;
+    border-color: yellow;
+}
+.warning {
+    display: none;
+}
