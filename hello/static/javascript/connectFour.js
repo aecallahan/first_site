@@ -106,7 +106,7 @@ var colorVictory = function() {
 
 // Clear the board for a new game
 var newGame = function() {
-    global.game = new Game([[],[],[],[],], BLACK);
+    global.game = new Game(copyBoard(DEFAULT_BOARD), RED);
     changeTitle();
 
     // Clear all classes added during gameplay
@@ -114,7 +114,7 @@ var newGame = function() {
     $('.circle').removeClass(BLACK);
     $('.circle').removeClass(VICTORY);
 
-    botFirstTurn();
+    // botFirstTurn();
 }
 
 
@@ -139,9 +139,9 @@ var botChooseColumn = function() {
 // Return the score of a game depending on its outcome
 var score = function(game) {
     if (game.isOver && game.activePlayer == BLACK) {
-        return 1;
+        return 100 - game.totalTurns;
     } else if (game.isOver && game.activePlayer == RED) {
-        return -1;
+        return -100 + game.totalTurns;
     } else {
         return 0;
     }
@@ -191,6 +191,7 @@ var Game = function(board, activePlayer) {
     this.winningVector = [];
     this.miniMaxRedChoice = -1;
     this.miniMaxBlackChoice = -1;
+    this.totalTurns = 0;
     currentID++;
 }
 
@@ -206,6 +207,7 @@ Game.prototype = {
     },
     // Make a particular move
     makeMove: function(column) {
+        this.totalTurns++;
         this.board[column].push(this.activePlayer);
         if (this.checkIfWon(column)) {
             this.isOver = true;
@@ -283,6 +285,7 @@ Game.prototype = {
     copy: function() {
         var boardCopy = copyBoard(this.board);
         var newGame = new Game(boardCopy, this.activePlayer);
+        newGame.totalTurns = this.totalTurns;
         return newGame;
     },
 }
